@@ -1,10 +1,13 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text } from "react-native";
+import React from "react";
+import { Box } from "native-base";
 
-export default function CreateAccount() {
+export default function CreateAccount({ navigation }) {
   return (
-    <View>
+    <Box safeArea>
       <Text>CreateAccount</Text>
-    </View>
-  )
+
+      <Text onPress={() => navigation.navigate("SignIn")}>Sign In</Text>
+    </Box>
+  );
 }
