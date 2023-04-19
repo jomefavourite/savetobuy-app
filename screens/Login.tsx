@@ -7,6 +7,7 @@ import {
   FormControl,
   Icon,
   Input,
+  Link,
   Pressable,
   VStack,
 } from "native-base";
@@ -137,9 +138,9 @@ export default function Login({ navigation }) {
           <Text>Forgot Password?</Text>
           <Text>
             Don't Have an Account?{" "}
-            <Text className='' onPress={() => navigation.navigate("SignUp")}>
+            <Link className='' onPress={() => navigation.navigate("SignUp")}>
               Create One
-            </Text>
+            </Link>
           </Text>
         </Box>
       </View>

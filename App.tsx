@@ -7,14 +7,51 @@ import SignUp from "./screens/SignUp";
 import { NativeBaseProvider } from "native-base";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
+import * as SplashScreen from "expo-splash-screen";
+import {
+  useFonts,
+  Karla_400Regular,
+  Karla_500Medium,
+  Karla_600SemiBold,
+  Karla_700Bold,
+  Karla_400Regular_Italic,
+  Karla_700Bold_Italic,
+} from "@expo-google-fonts/karla";
+import { useCallback } from "react";
+import { theme } from "./utils";
+import { Entypo } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+
+// Keep the splash screen visible while we fetch resources
+// SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
+  let [fontsLoaded] = useFonts({
+    Karla_400Regular,
+    Karla_500Medium,
+    Karla_600SemiBold,
+    Karla_700Bold,
+    Karla_400Regular_Italic,
+    Karla_700Bold_Italic,
+  });
+
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <NativeBaseProvider>
+    <NativeBaseProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator>
           {isLoggedIn ? (
@@ -26,8 +63,8 @@ export default function App() {
             </Stack.Group>
           ) : (
             <Stack.Group screenOptions={{ headerShown: false }}>
-              <Stack.Screen name='SignUp' component={SignUp} />
               <Stack.Screen name='SignIn' component={Login} />
+              <Stack.Screen name='SignUp' component={SignUp} />
             </Stack.Group>
           )}
         </Stack.Navigator>
@@ -42,9 +79,42 @@ NativeWindStyleSheet.setOutput({
 
 const AuthenticatedStackScreen = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name='Home' component={Home} />
-      <Tab.Screen name='Profile' component={Profile} />
+    <Tab.Navigator
+      initialRouteName='HomeStack'
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#00adee",
+      }}
+    >
+      <Tab.Screen
+        name='HomeStack'
+        component={HomeStackScreen}
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name='home' color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='Profile'
+        component={Profile}
+        options={{
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name='person' color={color} size={size} />
+          ),
+          tabBarIconStyle: {},
+        }}
+      />
     </Tab.Navigator>
+  );
+};
+
+const HomeStackScreen = () => {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name='Home' component={Home} />
+    </HomeStack.Navigator>
   );
 };

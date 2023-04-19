@@ -1,7 +1,8 @@
 import { View } from "react-native";
 import React from "react";
 import { Image } from "react-native";
-import LoginBG from "../assets/login-bg.svg";
+// import LoginBG from "../assets/login-bg.svg";
+import LoginBgSvg from "./svg/LoginBgSVG";
 
 const AuthHeader = () => {
   // console.log(logoImage);
@@ -13,7 +14,8 @@ const AuthHeader = () => {
         className='w-5'
       />
 
-      <LoginBG width={"100%"} style={{ marginBottom: 40 }} />
+      {/* <LoginBG width={"100%"} style={{ marginBottom: 40 }} /> */}
+      <LoginBgSvg width={"100%"} style={{ marginBottom: 40 }} />
     </View>
   );
 };

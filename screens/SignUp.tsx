@@ -51,7 +51,7 @@ export default function SignUp({ navigation }) {
 
   return (
     <Box bgColor={"#fff"} safeArea>
-      <ScrollView mx={3} bgColor={"#fff"}>
+      <ScrollView mx={3} bgColor={"#fff"} className='mb-4'>
         <AuthHeader />
 
         <Text className='text-2xl text-bold'>Create An Account</Text>
@@ -236,7 +236,7 @@ export default function SignUp({ navigation }) {
                 { label: "Facebook", value: "facebook" },
                 { label: "Twitter", value: "twitter" },
               ].map((item, ind) => (
-                <Select.Item label={item.label} value={item.value} />
+                <Select.Item key={ind} label={item.label} value={item.value} />
               ))}
             </Select>
           </Box>
