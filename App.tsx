@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Login from "./screens/Login";
 import SignUp from "./screens/SignUp";
-import { NativeBaseProvider } from "native-base";
+import { NativeBaseProvider, Heading, Avatar } from "native-base";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
 import * as SplashScreen from "expo-splash-screen";
@@ -114,7 +114,14 @@ const AuthenticatedStackScreen = () => {
 const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name='Home' component={Home} />
+      <HomeStack.Screen
+        name='Home'
+        component={Home}
+        // options={{
+        //   headerTitle: (props) => <Heading>Hi, Favourite</Heading>,
+        //   headerRight: () => <Avatar size=''>JF</Avatar>,
+        // }}
+      />
     </HomeStack.Navigator>
   );
 };

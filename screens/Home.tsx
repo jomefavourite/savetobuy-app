@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button, Heading, Pressable, ScrollView, Text } from "native-base";
 import { Entypo } from "@expo/vector-icons";
+import WalletHistory from "../components/WalletHistory";
 
 export default function Home() {
   const [showAmount, setShowAmount] = React.useState(false);
@@ -62,6 +63,10 @@ export default function Home() {
               Withdraw Funds
             </Button>
           </Box>
+        </Box>
+
+        <Box>
+          <WalletHistory />
         </Box>
       </Box>
     </ScrollView>
