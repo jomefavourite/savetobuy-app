@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Login from "./screens/Login";
 import SignUp from "./screens/SignUp";
-import { NativeBaseProvider, Heading, Avatar } from "native-base";
+import { NativeBaseProvider, Heading, Avatar, Box } from "native-base";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
 import * as SplashScreen from "expo-splash-screen";
@@ -21,6 +21,7 @@ import { useCallback } from "react";
 import { theme } from "./utils";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import FinancialGoal from "./screens/FinancialGoal";
 
 // Keep the splash screen visible while we fetch resources
 // SplashScreen.preventAutoHideAsync();
@@ -117,11 +118,16 @@ const HomeStackScreen = () => {
       <HomeStack.Screen
         name='Home'
         component={Home}
-        // options={{
-        //   headerTitle: (props) => <Heading>Hi, Favourite</Heading>,
-        //   headerRight: () => <Avatar size=''>JF</Avatar>,
-        // }}
+        options={({ route }) => ({
+          headerTitle: (props) => <Heading size={"md"}>Hi, Favourite</Heading>,
+          // headerLeft: () => (
+          //   <Box>
+          //     <Avatar size=''>JF</Avatar>
+          //   </Box>
+          // ),
+        })}
       />
+      <HomeStack.Screen name='FinancialGoal' component={FinancialGoal} />
     </HomeStack.Navigator>
   );
 };

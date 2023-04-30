@@ -29,54 +29,61 @@ const WalletHistory = () => {
 
   return (
     <>
-      <Box className='flex-row justify-between items-center'>
-        <Heading>Wallet History</Heading>
+      <Box className='flex-row items-center justify-between'>
+        <Heading size='md'>Wallet History</Heading>
 
         <Pressable className='flex-row' onPress={() => setIsShown(!isShown)}>
           <MaterialIcons
             name={isShown ? "keyboard-arrow-up" : "keyboard-arrow-down"}
             size={24}
-            color='black'
+            color='#00adee'
             className='bg-mainBlue'
           />
-          <Text>{isShown ? "Hide" : "Show more"}</Text>
+          <Text className='font-bold text-mainBlue'>
+            {isShown ? "Hide" : "Show more"}
+          </Text>
         </Pressable>
       </Box>
 
-      <Box className='space-y-3'>
-        {transactions.map((data) => (
-          <HStack className='border-b border-[#E0E6ED] py-4 items-center gap-3 justify-between'>
-            <Box className='flex-row gap-2'>
-              <Box className='bg-[#e9f7fd] p-2 rounded-full'>
-                <MaterialCommunityIcons
-                  name='arrow-bottom-left-thin'
-                  size={24}
-                  color={data.trans_type === "debit" ? "red" : "green"}
-                />
+      {isShown && (
+        <Box className='space-y-3'>
+          {transactions.map((data, i) => (
+            <HStack
+              key={i}
+              className='items-center justify-between border-b border-[#E0E6ED] py-4'
+            >
+              <Box className='flex-row gap-2'>
+                <Box className='rounded-full bg-[#e9f7fd] p-2'>
+                  <MaterialCommunityIcons
+                    name='arrow-bottom-left-thin'
+                    size={24}
+                    color={data.trans_type === "debit" ? "red" : "green"}
+                  />
+                </Box>
+                <Box>
+                  <Heading size={"sm"}>{data.trans_name}</Heading>
+                  <Text className='text-xs'>{data.trans_ref}</Text>
+                </Box>
               </Box>
               <Box>
-                <Heading size={"sm"}>{data.trans_name}</Heading>
-                <Text className='text-xs'>{data.trans_ref}</Text>
+                <Heading
+                  fontWeight={400}
+                  className={`${
+                    data.trans_type === "debit"
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }`}
+                >
+                  # {data.amount}
+                </Heading>
+                <Text className='text-xs'>
+                  {data.time} - {data.date}
+                </Text>
               </Box>
-            </Box>
-            <Box>
-              <Heading
-                fontWeight={400}
-                className={`${
-                  data.trans_type === "debit"
-                    ? "text-red-500"
-                    : "text-green-500"
-                }`}
-              >
-                # {data.amount}
-              </Heading>
-              <Text className='text-xs'>
-                {data.time} - {data.date}
-              </Text>
-            </Box>
-          </HStack>
-        ))}
-      </Box>
+            </HStack>
+          ))}
+        </Box>
+      )}
     </>
   );
 };
